@@ -1,12 +1,13 @@
+import React, { useRef, useState } from 'react';
 import './App.css';
 
-import firebase from 'firebase/app';
-import 'firebase/firestore';
-import 'firebase/auth';
-import { initializeApp } from "firebase/app";
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/firestore';
+import 'firebase/compat/auth';
+import 'firebase/compat/analytics';
+
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
-import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 
 
 // Import the functions you need from the SDKs you need
@@ -22,23 +23,52 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-initializeApp(firebaseConfig);
+firebase.initializeApp(firebaseConfig);
 
-const auth = getAuth();
+const auth = firebase.auth();
 
 function App() {
   const [user] = useAuthState(auth);
+
   return (
     <div className="App">
       <header className="App-header">
-        {!!user ?
+        {user &&
           <strong>{user.displayName}</strong>
-          : <button>Log In</button>
         }
       </header>
       <div className="App-main">
+        {!!user ?
+          <ChatRoom></ChatRoom>
+          : <SignIn></SignIn>
+        }
       </div>
     </div>
+  );
+}
+
+function SignIn() {
+  const authWithGoogle = () => {
+    const provider = new firebase.auth.GoogleAuthProvider();
+    auth.signInWithPopup(provider);
+  }
+
+  return (
+    <button onClick={authWithGoogle}>Log In</button>
+  );
+}
+function ChatRoom() {
+  const [formValue, setFormValue] = useState('');
+  return (
+    <>
+      <main>
+        Here's where the chats should be
+      </main>
+
+      <form >
+        <input type="text" value={formValue} onChange={e => setFormValue(e.target.value)} placeholder='Type your message' />
+      </form>
+    </>
   );
 }
 
