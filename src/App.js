@@ -34,7 +34,6 @@ function App() {
 
   return (
     <div className="App">
-      <CustomButton className="log" onClick={() => console.log(user)}>Log</CustomButton>
       <header className="App-header">
         {user !== null &&
           <strong>{user.displayname}</strong>
@@ -66,37 +65,52 @@ function ChatRoom() {
   const [messages] = useCollectionData(query, { idField: 'id' });
 
   const [formValue, setFormValue] = useState('');
-  const sendMessage = () => {
+
+  /* style */
+  const isBlank = formValue === undefined || formValue === "";
+
+  const sendMessage = (e) => {
+    e.preventDefault();
+    const { uid, photoURL } = auth.currentUser;
+    const text = e.target.value;
+
+    text !== undefined && messagesRef.add({
+      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+      photoURL: photoURL,
+      text: text,
+      uid: uid,
+    });
 
   }
   return (
     <>
       <main>
         {messages &&
-          messages.map(msg => <ChatBubble key={msg.id} uid={msg.uid}>{msg.text}</ChatBubble>)
+          messages.map(msg => <ChatBubble key={msg.id} uid={msg.uid} photoURL={msg.photoURL}>{msg.text}</ChatBubble>)
         }
       </main>
 
-      <form >
+      <form onSubmit={sendMessage}>
         <input type="text" value={formValue} onChange={e => setFormValue(e.target.value)} placeholder='Type your message' />
-        <CustomButton onClick={sendMessage}>🚀</CustomButton>
+        <CustomButton disabled={isBlank}>🚀</CustomButton>
       </form>
     </>
   );
 }
 
-function CustomButton({ onClick, children }) {
+function CustomButton({ onClick, children, disabled }) {
   return (
-    <button className='CustomButton round' onClick={onClick}>
+    <button disabled={disabled} className='CustomButton round' onClick={onClick}>
       {children}
     </button>
   );
 }
-function ChatBubble({ uid, children }) {
+function ChatBubble({ uid, children, photoURL }) {
   const ownMessage = uid === auth.currentUser.uid;
   return (
     <div className={`ChatBubble round ${ownMessage && 'own'}`} >
-      {children}
+      <span>{children}</span>
+      <img className='avatar round' src={photoURL} alt="" />
     </div>
   );
 }
