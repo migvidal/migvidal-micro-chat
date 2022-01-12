@@ -26,6 +26,7 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 const auth = firebase.auth();
+const firestore = firebase.firestore();
 
 function App() {
   const [user, loading, error] = useAuthState(auth);
@@ -33,7 +34,7 @@ function App() {
 
   return (
     <div className="App">
-      <button className="log" onClick={() => console.log(user)}>Log</button>
+      <CustomButton className="log" onClick={() => console.log(user)}>Log</CustomButton>
       <header className="App-header">
         {user !== null &&
           <strong>{user.displayname}</strong>
@@ -56,10 +57,11 @@ function SignIn() {
   }
 
   return (
-    <button onClick={authWithGoogle}>Sign In with Google</button>
+    <CustomButton onClick={authWithGoogle}>Sign In with Google</CustomButton>
   );
 }
 function ChatRoom() {
+  const messagesRef = firestore.collection('messages');
   const [formValue, setFormValue] = useState('');
   return (
     <>
@@ -71,6 +73,14 @@ function ChatRoom() {
         <input type="text" value={formValue} onChange={e => setFormValue(e.target.value)} placeholder='Type your message' />
       </form>
     </>
+  );
+}
+
+function CustomButton({onClick, children}) {
+  return (
+    <button className='CustomButton round' onClick={onClick}>
+      {children}
+    </button>
   );
 }
 

@@ -1,37 +1,98 @@
-.App {
-  text-align: center;
+/* RESET */
+
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* Remove default margin */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+blockquote,
+dl,
+dd {
+  margin: 0;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/* Set core root defaults */
+html:focus-within {
+  scroll-behavior: smooth;
 }
 
-.App-header {
-  background-color: white;
+/* Set core body defaults */
+body {
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
 }
 
-.App-link {
-  color: #61dafb;
+/* A elements that don't have a class get default styles */
+a:not([class]) {
+  text-decoration-skip-ink: auto;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+/* Make images easier to work with */
+img,
+picture {
+  max-width: 100%;
+  display: block;
+}
+
+/* Inherit fonts for inputs and buttons */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+    scroll-behavior: auto;
   }
-  to {
-    transform: rotate(360deg);
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
+}
+
+
+/* STYLES */
+
+.round {
+  border-radius: 9999px;
+}
+
+.CustomButton {
+  padding: .6rem 1.2rem;
+  border: none;
+  background-color: black;
+  color: whitesmoke;
+  font-weight: bold;
+  margin: .2rem;
+}
+.RoundButton:hover {
+  cursor: pointer;
+  background-color: rgb(54, 54, 54);
+}
+
+
+input[type=text] {
+  padding: .4rem 1rem;
+  border-color: black;
+  border-radius: 9999px;
+
 }
