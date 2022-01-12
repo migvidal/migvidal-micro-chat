@@ -66,11 +66,14 @@ function ChatRoom() {
   const [messages] = useCollectionData(query, { idField: 'id' });
 
   const [formValue, setFormValue] = useState('');
+  const sendMessage = () => {
+
+  }
   return (
     <>
       <main>
         {messages &&
-          messages.map(msg => <p key={msg.id}>{msg.text}</p>)
+          messages.map(msg => <ChatBubble key={msg.id} uid={msg.uid}>{msg.text}</ChatBubble>)
         }
       </main>
 
@@ -87,6 +90,14 @@ function CustomButton({ onClick, children }) {
     <button className='CustomButton round' onClick={onClick}>
       {children}
     </button>
+  );
+}
+function ChatBubble({ uid, children }) {
+  const ownMessage = uid === auth.currentUser.uid;
+  return (
+    <div className={`ChatBubble round ${ownMessage && 'own'}`} >
+      {children}
+    </div>
   );
 }
 

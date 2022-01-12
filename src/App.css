@@ -84,15 +84,14 @@ select {
   font-weight: bold;
   margin: .2rem;
 }
-.RoundButton:hover {
+
+.CustomButton:hover {
   cursor: pointer;
   background-color: rgb(54, 54, 54);
 }
-
 
 input[type=text] {
   padding: .4rem 1rem;
   border-color: black;
   border-radius: 9999px;
-
 }
