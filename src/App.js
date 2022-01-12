@@ -7,7 +7,7 @@ import 'firebase/compat/auth';
 import 'firebase/compat/analytics';
 
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { useCollectionData } from 'react-firebase-hooks/firestore';
+import { useCollection, useCollectionData } from 'react-firebase-hooks/firestore';
 
 
 // Import the functions you need from the SDKs you need
@@ -62,21 +62,27 @@ function SignIn() {
 }
 function ChatRoom() {
   const messagesRef = firestore.collection('messages');
+  const query = messagesRef.orderBy('createdAt').limit(10);
+  const [messages] = useCollectionData(query, { idField: 'id' });
+
   const [formValue, setFormValue] = useState('');
   return (
     <>
       <main>
-        Here's where the chats should be
+        {messages &&
+          messages.map(msg => <p key={msg.id}>{msg.text}</p>)
+        }
       </main>
 
       <form >
         <input type="text" value={formValue} onChange={e => setFormValue(e.target.value)} placeholder='Type your message' />
+        <CustomButton onClick={sendMessage}>🚀</CustomButton>
       </form>
     </>
   );
 }
 
-function CustomButton({onClick, children}) {
+function CustomButton({ onClick, children }) {
   return (
     <button className='CustomButton round' onClick={onClick}>
       {children}
