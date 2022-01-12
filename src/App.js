@@ -28,19 +28,21 @@ firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 
 function App() {
-  const [user] = useAuthState(auth);
+  const [user, loading, error] = useAuthState(auth);
+  const x = null;
 
   return (
     <div className="App">
+      <button className="log" onClick={() => console.log(user)}>Log</button>
       <header className="App-header">
-        {user &&
-          <strong>{user.displayName}</strong>
+        {user !== null &&
+          <strong>{user.displayname}</strong>
         }
       </header>
       <div className="App-main">
-        {!!user ?
-          <ChatRoom></ChatRoom>
-          : <SignIn></SignIn>
+        {user !== null ?
+          <ChatRoom />
+          : <SignIn />
         }
       </div>
     </div>
@@ -54,7 +56,7 @@ function SignIn() {
   }
 
   return (
-    <button onClick={authWithGoogle}>Log In</button>
+    <button onClick={authWithGoogle}>Sign In with Google</button>
   );
 }
 function ChatRoom() {
