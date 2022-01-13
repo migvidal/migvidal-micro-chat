@@ -1,4 +1,4 @@
-/* RESET */
+/*_ RESET */
 
 /* Box sizing rules */
 *,
@@ -69,11 +69,13 @@ select {
   }
 }
 
-/* STYLES */
+/*_ UTILITY CLASSES  */
 
-.round {
+.rounded {
   border-radius: 9999px;
 }
+
+/*_ STYLES */
 
 .CustomButton {
   padding: 0.6rem 1.2rem;
@@ -90,13 +92,37 @@ select {
 }
 .CustomButton:disabled {
   cursor: not-allowed;
-  opacity: .5;
+  opacity: 0.5;
 }
 
 input[type="text"] {
   padding: 0.4rem 1rem;
   border-color: black;
   border-radius: 9999px;
+}
+
+/* chatroom */
+.ChatRoom-main {
+  display: flex;
+  flex-direction: column;
+}
+.ChatMessage {
+  display: flex;
+  align-items: center;
+}
+.ChatMessage.own {
+  flex-direction: row-reverse;
+}
+
+.chat-bubble {
+  background-color: lightgrey;
+  align-self: flex-start;
+  padding: 1rem;
+  margin: .5rem 0;
+}
+.chat-bubble.own {
+  background-color: lightblue;
+  align-self: flex-end;
 }
 
 .avatar {

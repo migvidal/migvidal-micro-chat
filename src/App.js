@@ -84,9 +84,9 @@ function ChatRoom() {
   }
   return (
     <>
-      <main>
+      <main className='ChatRoom-main'>
         {messages &&
-          messages.map(msg => <ChatBubble key={msg.id} uid={msg.uid} photoURL={msg.photoURL}>{msg.text}</ChatBubble>)
+          messages.map(msg => <ChatMessage key={msg.id} uid={msg.uid} photoURL={msg.photoURL}>{msg.text}</ChatMessage>)
         }
       </main>
 
@@ -100,17 +100,19 @@ function ChatRoom() {
 
 function CustomButton({ onClick, children, disabled }) {
   return (
-    <button disabled={disabled} className='CustomButton round' onClick={onClick}>
+    <button disabled={disabled} className='CustomButton rounded' onClick={onClick}>
       {children}
     </button>
   );
 }
-function ChatBubble({ uid, children, photoURL }) {
+function ChatMessage({ uid, children, photoURL }) {
   const ownMessage = uid === auth.currentUser.uid;
   return (
-    <div className={`ChatBubble round ${ownMessage && 'own'}`} >
-      <span>{children}</span>
-      <img className='avatar round' src={photoURL} alt="" />
+    <div className={`ChatMessage ${ownMessage ? 'own' : ''}`}>
+      <img className='avatar rounded' src={photoURL} alt="" />
+      <div className={`chat-bubble rounded ${ownMessage ? 'own' : ''}`} >
+        <span className='message'>{children}</span>
+      </div>
     </div>
   );
 }
