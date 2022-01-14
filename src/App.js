@@ -61,9 +61,8 @@ function SignIn() {
 }
 function ChatRoom() {
   const messagesRef = firestore.collection('messages');
-  const query = messagesRef.orderBy('createdAt').limit(10);
-  const [messages] = useCollectionData(query, { idField: 'id' });
-
+  const query = messagesRef.orderBy('createdAt').limit(25);
+  const [messages] = useCollectionData(query, { idField: 'id' }) ;
   const [formValue, setFormValue] = useState('');
 
   /* style */
@@ -74,13 +73,17 @@ function ChatRoom() {
     const { uid, photoURL } = auth.currentUser;
     const text = formValue;
 
-    text !== undefined && messagesRef.add({
+
+    messagesRef.add({
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
       photoURL: photoURL,
       text: text,
       uid: uid,
+    }).then((docRef) => {
+    }).catch((error) => {
+      console.error("Error adding document: ", error);
     });
-
+    setFormValue('');
   }
   return (
     <>
