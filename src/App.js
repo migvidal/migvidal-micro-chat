@@ -64,7 +64,7 @@ function SignIn() {
 }
 function SignOut() {
   return (
-    <CustomButton className="SignOut" onClick={auth.signOut}>Salir</CustomButton>
+    <CustomButton className="SignOut" onClick={auth.signOut()}>Salir</CustomButton>
   );
 }
 function ChatRoom() {
