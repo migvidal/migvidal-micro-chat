@@ -93,7 +93,7 @@ function ChatRoom() {
         }
       </main>
 
-      <form onSubmit={sendMessage}>
+      <form className='ChatRoom-form' onSubmit={sendMessage}>
         <input type="text" value={formValue} onChange={e => setFormValue(e.target.value)} placeholder='Type your message' />
         <CustomButton disabled={isBlank}>🚀</CustomButton>
       </form>
@@ -113,9 +113,9 @@ function ChatMessage({ uid, children, photoURL }) {
   return (
     <div className={`ChatMessage ${ownMessage ? 'own' : ''}`}>
       <img className='avatar rounded' src={photoURL} alt="" />
-      <div className={`chat-bubble rounded ${ownMessage ? 'own' : ''}`} >
+      <p className={`chat-bubble  ${ownMessage ? 'own' : ''}`} >
         <span className='message'>{children}</span>
-      </div>
+      </p>
     </div>
   );
 }

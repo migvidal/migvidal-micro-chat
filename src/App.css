@@ -69,6 +69,15 @@ select {
   }
 }
 
+/* VARIABLES */
+:root {
+  --dark-purple: rgb(21, 20, 26);
+  --moderate-purple: rgb(34, 33, 43);
+  --blue: rgb(40, 108, 253);
+  --avatar-height: 40px;
+  --avatar-margin: 1rem;
+}
+
 /*_ UTILITY CLASSES  */
 
 .rounded {
@@ -76,6 +85,10 @@ select {
 }
 
 /*_ STYLES */
+
+body {
+  background-color: var(--dark-purple);
+}
 
 .CustomButton {
   padding: 0.6rem 1.2rem;
@@ -95,37 +108,53 @@ select {
   opacity: 0.5;
 }
 
-input[type="text"] {
-  padding: 0.4rem 1rem;
-  border-color: black;
-  border-radius: 9999px;
-}
-
 /* chatroom */
+
 .ChatRoom-main {
   display: flex;
   flex-direction: column;
+  width: 95%;
+}
+
+.ChatRoom-form {
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  display: flex;
+
+  background: var(--moderate-purple);
+}
+input[type="text"] {
+  background: var(--moderate-purple);
+  color: white;
+  padding: 0.4rem 1rem;
+  border: none;
+  flex: 1;
 }
 .ChatMessage {
   display: flex;
   align-items: center;
+  margin: .2rem;
 }
 .ChatMessage.own {
   flex-direction: row-reverse;
 }
 
 .chat-bubble {
-  background-color: lightgrey;
-  align-self: flex-start;
-  padding: 1rem;
-  margin: .5rem 0;
+  min-height: var(--avatar-height);
+  
+  max-width: 500px;
+  background-color: rgb(73, 73, 73);
+  color: white;
+  padding: .5rem 1rem;
+  margin: 0 .5rem;
+  border-radius: 2rem;
 }
 .chat-bubble.own {
-  background-color: lightblue;
-  align-self: flex-end;
+  background-color: var(--blue);
 }
 
 .avatar {
-  width: 50px;
-  height: 50px;
+  height: var(--avatar-height);
+  width: var(--avatar-height);
 }
