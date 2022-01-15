@@ -42,12 +42,12 @@ function App() {
           </>
         }
       </header>
-      <div className="App-main">
-        {user !== null ?
-          <ChatRoom />
-          : <SignIn />
-        }
-      </div>
+
+      {user !== null ?
+        <ChatRoom />
+        : <SignIn />
+      }
+
     </div>
   );
 }
@@ -59,7 +59,9 @@ function SignIn() {
   }
 
   return (
-    <CustomButton onClick={authWithGoogle}>Entrar con Google</CustomButton>
+    <div className="SignIn">
+      <CustomButton onClick={authWithGoogle}>Entrar con Google</CustomButton>
+    </div>
   );
 }
 function SignOut() {
@@ -109,7 +111,7 @@ function ChatRoom() {
   );
 }
 
-function CustomButton({ onClick, children, disabled, className }) {
+function CustomButton({ onClick, children, disabled, className = '' }) {
   return (
     <button disabled={disabled} className={`${className} CustomButton`} onClick={onClick}>
       {children}

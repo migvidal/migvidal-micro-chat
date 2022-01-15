@@ -90,6 +90,10 @@ body {
   background-color: var(--dark-purple);
 }
 
+.SignIn {
+  display: flex;
+}
+
 .App-header {
   position: fixed;
   top: 0;
