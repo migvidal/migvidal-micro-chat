@@ -36,7 +36,10 @@ function App() {
     <div className="App">
       <header className="App-header">
         {user !== null &&
-          <strong>{user.displayname}</strong>
+          <>
+            <SignOut />
+            <strong>{user.displayname}</strong>
+          </>
         }
       </header>
       <div className="App-main">
@@ -56,13 +59,18 @@ function SignIn() {
   }
 
   return (
-    <CustomButton onClick={authWithGoogle}>Sign In with Google</CustomButton>
+    <CustomButton onClick={authWithGoogle}>Entrar con Google</CustomButton>
+  );
+}
+function SignOut() {
+  return (
+    <CustomButton className="SignOut" onClick={auth.signOut}>Salir</CustomButton>
   );
 }
 function ChatRoom() {
   const messagesRef = firestore.collection('messages');
   const query = messagesRef.orderBy('createdAt').limit(25);
-  const [messages] = useCollectionData(query, { idField: 'id' }) ;
+  const [messages] = useCollectionData(query, { idField: 'id' });
   const [formValue, setFormValue] = useState('');
 
   /* style */
@@ -101,9 +109,9 @@ function ChatRoom() {
   );
 }
 
-function CustomButton({ onClick, children, disabled }) {
+function CustomButton({ onClick, children, disabled, className }) {
   return (
-    <button disabled={disabled} className='CustomButton rounded' onClick={onClick}>
+    <button disabled={disabled} className={`${className} CustomButton`} onClick={onClick}>
       {children}
     </button>
   );

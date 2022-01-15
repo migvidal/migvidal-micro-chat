@@ -90,6 +90,15 @@ body {
   background-color: var(--dark-purple);
 }
 
+.App-header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: #000;
+  display: flex;
+  justify-content: flex-end;
+}
+
 .CustomButton {
   padding: 0.6rem 1.2rem;
   border: none;
