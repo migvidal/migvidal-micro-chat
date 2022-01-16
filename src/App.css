@@ -90,12 +90,17 @@ body {
   background-color: var(--dark-purple);
 }
 
+.App {
+  max-width: 728px;
+  margin: 0 auto;
+}
+
 .SignIn {
   display: flex;
 }
 
 .App-header {
-  position: fixed;
+  position: sticky;
   top: 0;
   width: 100%;
   background: #000;
@@ -131,7 +136,7 @@ body {
 
 .ChatRoom-form {
   width: 100%;
-  position: fixed;
+  position: sticky;
   bottom: 0;
   display: flex;
 
@@ -147,7 +152,7 @@ input[type="text"] {
 .ChatMessage {
   display: flex;
   align-items: center;
-  margin: .2rem;
+  margin: 0.2rem;
 }
 .ChatMessage.own {
   flex-direction: row-reverse;
@@ -155,12 +160,12 @@ input[type="text"] {
 
 .chat-bubble {
   min-height: var(--avatar-height);
-  
+
   max-width: 500px;
   background-color: rgb(73, 73, 73);
   color: white;
-  padding: .5rem 1rem;
-  margin: 0 .5rem;
+  padding: 0.5rem 1rem;
+  margin: 0 0.5rem;
   border-radius: 2rem;
 }
 .chat-bubble.own {

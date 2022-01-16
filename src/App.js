@@ -55,7 +55,7 @@ function App() {
 function SignIn() {
   const authWithGoogle = () => {
     const provider = new firebase.auth.GoogleAuthProvider();
-    auth.signInWithPopup(provider);
+    auth.signInWithRedirect(provider);
   }
 
   return (
@@ -66,7 +66,7 @@ function SignIn() {
 }
 function SignOut() {
   return (
-    <CustomButton className="SignOut" onClick={auth.signOut()}>Salir</CustomButton>
+    <CustomButton className="SignOut" onClick={()=>auth.signOut()}>Salir</CustomButton>
   );
 }
 function ChatRoom() {
