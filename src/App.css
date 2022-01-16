@@ -76,6 +76,8 @@ select {
   --blue: rgb(40, 108, 253);
   --avatar-height: 40px;
   --avatar-margin: 1rem;
+  --text-color: white;
+  --logo-font: 'Unlock', serif;
 }
 
 /*_ UTILITY CLASSES  */
@@ -97,6 +99,7 @@ body {
 
 .SignIn {
   display: flex;
+  justify-content: center;
 }
 
 .App-header {
@@ -105,9 +108,14 @@ body {
   width: 100%;
   background: #000;
   display: flex;
-  justify-content: flex-end;
+  align-items: center; 
 }
-
+.logo {
+  flex: 1;
+  font-family: var(--logo-font);
+  font-size: 1.5rem;
+  color: var(--text-color);
+}
 .CustomButton {
   padding: 0.6rem 1.2rem;
   border: none;

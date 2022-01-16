@@ -35,6 +35,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
+        <span className="logo">micro-chat</span>
         {user !== null &&
           <>
             <SignOut />
@@ -66,7 +67,7 @@ function SignIn() {
 }
 function SignOut() {
   return (
-    <CustomButton className="SignOut" onClick={()=>auth.signOut()}>Salir</CustomButton>
+    <CustomButton className="SignOut" onClick={() => auth.signOut()}>Salir</CustomButton>
   );
 }
 function ChatRoom() {
