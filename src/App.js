@@ -73,6 +73,7 @@ function SignOut() {
   );
 }
 function ChatRoom() {
+  const dummyDiv = useRef(null);
   const messagesRef = firestore.collection('messages');
   const query = messagesRef.orderBy('createdAt').limit(25);
   const [messages] = useCollectionData(query, { idField: 'id' });
@@ -86,17 +87,19 @@ function ChatRoom() {
     const { uid, photoURL } = auth.currentUser;
     const text = formValue;
 
-
     messagesRef.add({
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
       photoURL: photoURL,
       text: text,
       uid: uid,
-    }).then((docRef) => {
+    }).then(() => {
+      setFormValue('');
+      dummyDiv.current.scrollIntoView({ behavior: 'smooth' });
     }).catch((error) => {
       console.error("Error adding document: ", error);
     });
-    setFormValue('');
+
+
   }
   return (
     <>
@@ -104,6 +107,7 @@ function ChatRoom() {
         {messages &&
           messages.map(msg => <ChatMessage key={msg.id} uid={msg.uid} photoURL={msg.photoURL}>{msg.text}</ChatMessage>)
         }
+        <span ref={dummyDiv}></span>
       </main>
 
       <form className='ChatRoom-form' onSubmit={sendMessage}>
