@@ -90,6 +90,7 @@ select {
 
 body {
   background-color: var(--dark-purple);
+  overflow: hidden;
 }
 
 .App {
