@@ -56,7 +56,7 @@ function App() {
 function SignIn() {
   const authWithGoogle = () => {
     const provider = new firebase.auth.GoogleAuthProvider();
-    auth.signInWithPopup(provider)
+    auth.signInWithRedirect(provider)
       .then(m => console.log('success:' + m))
       .catch(e => console.log('error:' + e));
   }
